@@ -37,9 +37,4 @@ public class RoomJdbcDao implements RoomDao {
     public Optional<Room> findById(final int roomId) {
         return jdbcTemplate.queryForSingleResult("select * from room where id = ?", rowMapper, roomId);
     }
-
-    @Override
-    public void deleteAll() {
-        jdbcTemplate.executeUpdate("DELETE FROM room");
-    }
 }

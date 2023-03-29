@@ -167,9 +167,5 @@ public class GameServiceTest {
         public List<MoveDto> findAllByRoomId(final int roomId) {
             return List.of();
         }
-
-        @Override
-        public void deleteAll() {
-        }
     }
 }

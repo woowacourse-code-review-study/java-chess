@@ -7,6 +7,4 @@ public interface GameDao {
     void save(final MoveDto moveDto, final int roomId);
 
     List<MoveDto> findAllByRoomId(final int roomId);
-
-    void deleteAll();
 }

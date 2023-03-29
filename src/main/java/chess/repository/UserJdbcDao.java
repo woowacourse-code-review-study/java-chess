@@ -26,8 +26,4 @@ public class UserJdbcDao implements UserDao {
     public Optional<User> findByName(final String name) {
         return jdbcTemplate.queryForSingleResult("SELECT * FROM user WHERE name = ?", rowMapper, name);
     }
-
-    public void deleteAll() {
-        jdbcTemplate.executeUpdate("DELETE FROM user");
-    }
 }

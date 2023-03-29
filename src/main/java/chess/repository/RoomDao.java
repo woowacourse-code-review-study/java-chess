@@ -10,6 +10,4 @@ public interface RoomDao {
     List<Room> findAllByUserId(final int userId);
 
     Optional<Room> findById(final int roomId);
-
-    void deleteAll();
 }

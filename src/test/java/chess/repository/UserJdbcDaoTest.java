@@ -35,7 +35,7 @@ public class UserJdbcDaoTest {
 
     @BeforeEach
     void setUp() {
-        userDao.deleteAll();
+        jdbcTemplate.executeUpdate("DELETE FROM user");
     }
 
     @AfterAll

@@ -120,9 +120,5 @@ class RoomServiceTest {
                     .filter(room -> room.getId() == roomId)
                     .findFirst();
         }
-
-        @Override
-        public void deleteAll() {
-        }
     }
 }

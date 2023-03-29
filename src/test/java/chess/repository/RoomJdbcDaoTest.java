@@ -36,7 +36,7 @@ public class RoomJdbcDaoTest {
 
     @BeforeEach
     void setUp() {
-        roomDao.deleteAll();
+        jdbcTemplate.executeUpdate("DELETE FROM room");
     }
 
     @AfterAll

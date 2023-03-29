@@ -31,8 +31,4 @@ public class GameJdbcDao implements GameDao {
     public List<MoveDto> findAllByRoomId(final int roomId) {
         return jdbcTemplate.query("SELECT * FROM move where room_id = ?", rowMapper, roomId);
     }
-
-    public void deleteAll() {
-        jdbcTemplate.executeUpdate("DELETE FROM move");
-    }
 }

@@ -8,6 +8,4 @@ public interface UserDao {
     void save(final String name);
 
     Optional<User> findByName(final String name);
-
-    void deleteAll();
 }

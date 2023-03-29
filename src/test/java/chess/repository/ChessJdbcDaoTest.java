@@ -36,7 +36,7 @@ class ChessJdbcDaoTest {
 
     @BeforeEach
     void setUp() {
-        gameDao.deleteAll();
+        jdbcTemplate.executeUpdate("DELETE FROM move");
     }
 
     @AfterAll

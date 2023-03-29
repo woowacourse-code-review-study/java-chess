@@ -94,9 +94,5 @@ public class UserServiceTest {
                     .filter(user -> user.getName().equals(name))
                     .findFirst();
         }
-
-        @Override
-        public void deleteAll() {
-        }
     }
 }
