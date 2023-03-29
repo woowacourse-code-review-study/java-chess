@@ -30,11 +30,8 @@ public class JdbcTemplate {
 
     public <T> List<T> query(final String query, final RowMapper<T> rowMapper, final Object... parameters) {
         final Connection connection = connectionPool.getConnection();
-        try (final PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            for (int i = 1; i <= parameters.length; i++) {
-                preparedStatement.setObject(i, parameters[i - 1]);
-            }
-            final ResultSet resultSet = preparedStatement.executeQuery();
+        try (final PreparedStatement preparedStatement = connection.prepareStatement(query);
+             final ResultSet resultSet = getResultSet(preparedStatement, parameters)) {
             final List<T> result = new ArrayList<>();
             while (resultSet.next()) {
                 result.add(rowMapper.mapRow(resultSet));
@@ -45,14 +42,20 @@ public class JdbcTemplate {
         }
     }
 
+    private ResultSet getResultSet(
+            final PreparedStatement preparedStatement,
+            final Object[] parameters) throws SQLException {
+        for (int i = 1; i <= parameters.length; i++) {
+            preparedStatement.setObject(i, parameters[i - 1]);
+        }
+        return preparedStatement.executeQuery();
+    }
+
     public <T> Optional<T> queryForSingleResult(final String query, final RowMapper<T> rowMapper,
                                                 final Object... parameters) {
         final Connection connection = connectionPool.getConnection();
-        try (final PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            for (int i = 1; i <= parameters.length; i++) {
-                preparedStatement.setObject(i, parameters[i - 1]);
-            }
-            final ResultSet resultSet = preparedStatement.executeQuery();
+        try (final PreparedStatement preparedStatement = connection.prepareStatement(query);
+             final ResultSet resultSet = getResultSet(preparedStatement, parameters)) {
             if (resultSet.next()) {
                 return Optional.of(rowMapper.mapRow(resultSet));
             }
